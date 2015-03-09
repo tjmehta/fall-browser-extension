@@ -1,0 +1,38 @@
+{
+  "name": "fall-browser",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Fall Browser Extension",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_PATH='./lib:./test' lab test/*.js",
+    "test-watch": "nodemon -x npm test",
+    "build": "npm run build-index && npm run build-popover && npm run build-copy-files",
+    "build-index":   "NODE_PATH=./lib browserify -t reactify lib/controllers/index.js > dist/Fall.safariextension/index.min.js",
+    "build-popover": "NODE_PATH=./lib browserify -t reactify lib/controllers/popover.jsx > dist/Fall.safariextension/popover.min.js",
+    "build-copy-files": "cp lib/views/*.html dist/Fall.safariextension/ && cp lib/images/* dist/Fall.safariextension/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/tjmehta/fall"
+  },
+  "author": "Tejesh Mehta",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tjmehta/fall/issues"
+  },
+  "homepage": "https://github.com/tjmehta/fall-browser",
+  "devDependencies": {
+    "browserify": "^9.0.3",
+    "code": "^1.3.0",
+    "lab": "^5.2.1",
+    "nodemon": "^1.3.7",
+    "callback-count": "^0.1.0",
+    "reactify": "^1.0.0"
+  },
+  "dependencies": {
+    "101": "^0.13.0",
+    "bind-all": "0.0.2",
+    "react": "^0.12.2"
+  }
+}
