@@ -1,2 +1,6 @@
 <div id="popover"></div>
-<script src="/popover.min.js"></script>
+<script>
+  var popoverScript = document.createElement('script');
+  popoverScript.src = safari.extension.baseURI + 'popover.min.js';
+  document.body.appendChild(popoverScript);
+</script>

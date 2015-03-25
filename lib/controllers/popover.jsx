@@ -4,9 +4,14 @@ require('config');
 
 var React = require('react');
 var TabHistoryPopover = require('views/tab-history-popover.jsx');
-var closeTab = new Tabs();
+var Tabs = require('models/tabs');
+
+var openWindows = require('models/open-windows');
+var closedTabs = new Tabs();
 
 React.render(
-  <TabHistoryPopover closeTab={ closeTab } />,
-  '#popover'
+  <TabHistoryPopover
+    closedTabs={ closedTabs }
+    openWindows={ openWindows } />,
+  document.getElementById('popover')
 );

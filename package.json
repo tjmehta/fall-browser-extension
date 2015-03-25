@@ -7,8 +7,9 @@
   "scripts": {
     "test": "NODE_PATH='./lib:./test' lab test/*.js",
     "test-watch": "nodemon -x npm test",
+    "watch": "nodemon -i ./dist/* -x npm run build",
     "build": "npm run build-index && npm run build-popover && npm run build-copy-files",
-    "build-index":   "NODE_PATH=./lib browserify -t reactify lib/controllers/index.js > dist/Fall.safariextension/index.min.js",
+    "build-index": "NODE_PATH=./lib browserify -t reactify lib/controllers/index.js > dist/Fall.safariextension/index.min.js",
     "build-popover": "NODE_PATH=./lib browserify -t reactify lib/controllers/popover.jsx > dist/Fall.safariextension/popover.min.js",
     "build-copy-files": "cp lib/views/*.html dist/Fall.safariextension/ && cp lib/images/* dist/Fall.safariextension/"
   },
@@ -33,6 +34,9 @@
   "dependencies": {
     "101": "^0.13.0",
     "bind-all": "0.0.2",
-    "react": "^0.12.2"
+    "react": "^0.12.2",
+    "array": "^0.4.3",
+    "array-extended": "0.0.11",
+    "listen-all": "^0.1.0"
   }
 }

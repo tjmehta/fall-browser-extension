@@ -20,6 +20,7 @@ var MockBrowserTab = require('mocks/browser-tab');
 
 describe('tab', function () {
   var ctx;
+
   beforeEach(function (done) {
     ctx = {};
     settings.set(process.env.TAB_EXPIRATION_KEY, 1000*1000); // 1000sec

@@ -2,9 +2,10 @@
 
 var MockEventTarget = require('mocks/event-target');
 
-function MockBrowserTab () {
+function MockBrowserTab (browserWindow) {
   MockEventTarget.call(this);
-  this.browserWindow = new MockEventTarget();
+  var MockBrowserWindow = require('mocks/browser-window');
+  this.browserWindow = browserWindow || new MockBrowserWindow();
 }
 
 require('util').inherits(MockBrowserTab, MockEventTarget);
