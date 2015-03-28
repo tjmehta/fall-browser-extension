@@ -6,43 +6,55 @@ var React = require('react');
 
 var TabHistoryPopover = React.createClass({
   getInitialState: function () {
-    console.log('getInitialState', arguments);
+    debugger;
+    console.log('TabHistoryPopover', 'getInitialState', arguments);
     this.listenToOpenWindows(this.props.openWindows);
     return {
       closedTabs: this.props.closedTabs
     };
   },
   listenToOpenWindows: function (windows) {
-    console.log('listenToOpenWindows', arguments);
+    debugger;
+    console.log('TabHistoryPopover', 'listenToOpenWindows', arguments);
     windows.on('window:close', this.handleWindowClose);
     windows.map(pluck('tabs')).forEach(this.listenToOpenTabs);
   },
   listenToOpenTabs: function (tabs) {
-    console.log('listenToOpenTabs', arguments);
+    debugger;
+    console.log('TabHistoryPopover', 'listenToOpenTabs', arguments);
     tabs.on('tab:close', this.handleTabClose);
   },
   listenToExpiredTabs: function (closedTabs) {
-    console.log('listenToExpiredTabs', arguments);
+    debugger;
+    console.log('TabHistoryPopover', 'listenToExpiredTabs', arguments);
     closedTabs.on('add', this.handleExpiredTabsAdd);
   },
   handleWindowClose: function (window) {
-    console.log('handleWindowClose', arguments);
+    debugger;
+    console.log('TabHistoryPopover', 'handleWindowClose', arguments);
     this.stopListeningToTabs(window.tabs);
   },
   handleTabClose: function (tab) {
-    console.log('handleTabClose', arguments);
+    debugger;
+    console.log('TabHistoryPopover', 'handleTabClose', arguments);
     this.closedTabs.push(tab);
+    this.setState({
+      closedTabs: this.closedTabs
+    });
   },
   handleExpiredTabsAdd: function (tab) {
-    console.log('handleExpiredTabsAdd', arguments);
+    debugger;
+    console.log('TabHistoryPopover', 'handleExpiredTabsAdd', arguments);
     this.$el.append('li');
   },
   stopListeningToTabs: function (tabs) {
-    console.log('stopListeningToTabs', arguments);
+    debugger;
+    console.log('TabHistoryPopover', 'stopListeningToTabs', arguments);
     tabs.off('tab:close', this.handleWindowClose);
   },
   render: function () {
-    console.log('render', arguments);
+    debugger;
+    console.log('TabHistoryPopover', 'render', arguments);
     var closedTabs = this.state.closedTabs;
     return <ul>
       {
@@ -53,7 +65,8 @@ var TabHistoryPopover = React.createClass({
       </ul>;
   },
   tabRow: function (closedTab) {
-    console.log('tabRow', arguments);
+    debugger;
+    console.log('TabHistoryPopover', 'tabRow', arguments);
     return <li>
       <span class="title">
         { closedTab.browserTab.title }
