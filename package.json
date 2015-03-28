@@ -5,7 +5,7 @@
   "description": "Fall Browser Extension",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_PATH='./lib:./test' lab test/*.js",
+    "test": "NODE_PATH='./lib:./test' lab -c test/*.js",
     "test-watch": "nodemon -x npm test",
     "watch": "nodemon -i ./dist/* -x npm run build",
     "build": "npm run build-index && npm run build-popover && npm run build-copy-files",

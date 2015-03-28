@@ -2,7 +2,6 @@
 'use strict';
 require('config');
 var pluck = require('101/pluck');
-var Tabs = require('models/tabs');
 var React = require('react');
 
 var TabHistoryPopover = React.createClass({
@@ -40,7 +39,7 @@ var TabHistoryPopover = React.createClass({
   },
   stopListeningToTabs: function (tabs) {
     console.log('stopListeningToTabs', arguments);
-    tabs.off('tab:expire', this.handleTabExpire);
+    tabs.off('tab:close', this.handleWindowClose);
   },
   render: function () {
     console.log('render', arguments);
