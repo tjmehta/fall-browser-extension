@@ -44,9 +44,9 @@ var TabHistoryPopover = React.createClass({
   render: function () {
     console.log('render', arguments);
     var closedTabs = this.state.closedTabs;
-    return <ul>
-      { closedTabs.map(this.tabRow) }
-    </ul>;
+    return closedTabs.length ?
+      <ul>{ closedTabs.map(this.tabRow) }</ul> :
+      <span> No closed or expired tabs. </span>
   },
   tabRow: function (closedTab) {
     console.log('tabRow', arguments);
