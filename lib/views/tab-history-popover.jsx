@@ -32,9 +32,12 @@ var TabHistoryPopover = React.createClass({
   },
   handleTabClose: function (tab) {
     console.log('TabHistoryPopover', 'handleTabClose', arguments);
-    this.state.closedTabs.push(tab);
-    console.log('TabHistoryPopover', 'state.length', this.state.closedTabs.length);
-    this.setState(this.state);
+    var closedTabs = this.state.closedTabs.slice(); // copy
+    closedTabs.push(tab);
+    console.log('TabHistoryPopover', 'state.length', closedTabs.length);
+    this.setState({
+      closedTabs: closedTabs
+    });
   },
   stopListeningToTabs: function (tabs) {
     console.log('TabHistoryPopover', 'stopListeningToTabs', arguments);
