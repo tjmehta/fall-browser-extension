@@ -107,7 +107,7 @@ var TabHistoryPopover = React.createClass({
         <div className="item-inner">
           <div className="item-title-row">
             <div className="item-title">{ tab.title }</div>
-            <div class="item-after">{ tab.expired ? 'expired' : '' }</div>
+            <div className="item-after">{ tab.expired ? 'expired' : '' }</div>
           </div>
           <div className="item-subtitle gray">{ tab.url }</div>
         </div>
