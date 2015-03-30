@@ -60,11 +60,11 @@ var TabHistoryPopover = React.createClass({
             <div className="subnavbar">
               <div className="buttons-row">
                 <a
-                  className={ this.getItemClass(1, "button tab-link") }
-                  onClick={ this.setActiveItem.bind(null, 1) }>All</a>
+                  href="#tab1"
+                  className="button tab-link active">All</a>
                 <a
-                  className={ this.getItemClass(2, "button tab-link") }
-                  onClick={ this.setActiveItem.bind(null, 2) }>Expired</a>
+                  href="#tab2"
+                  className="button tab-link">Expired</a>
               </div>
             </div>
           </div>
@@ -74,11 +74,13 @@ var TabHistoryPopover = React.createClass({
             <div className="page-content hide-bars-on-scroll pad-top-64">
               <div className="tabs">
                 <div
-                  className={ this.getItemClass(1, "tab list-block media-list") }>
+                  id="tab1"
+                  className="tab list-block media-list active">
                   { this.tabList(this.state.closedTabs, 'No closed or expired tabs') }
                 </div>
                 <div
-                  className={ this.getItemClass(2, "tab list-block media-list") }>
+                  id="tab2"
+                  className="tab list-block media-list">
                   { this.tabList(this.state.closedTabs.filter(isExpiredTab), 'No expired tabs') }
                 </div>
               </div>
@@ -87,17 +89,6 @@ var TabHistoryPopover = React.createClass({
         </div>
       </div>
     </div>;
-  },
-  setActiveItem: function (activeNavTab) {
-    this.setState({
-      activeNavTab: activeNavTab,
-      closedTabs: this.state.closedTabs // keep same
-    });
-  },
-  getItemClass: function (navTabNum, classes) {
-    // blah hack for framework7
-    console.log('TabHistoryPopover', 'getItemClass', arguments, this.state);
-    return classes + ((this.state.activeNavTab === navTabNum) ? ' active' : '');
   },
   tabList: function (tabs, emptyMessage) {
     return <ul>

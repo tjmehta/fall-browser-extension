@@ -22,6 +22,19 @@
   appendTag(document.body, 'script', {
     src: safari.extension.baseURI + 'popover.min.js'
   });
+  // framework7 js
+  appendTag(document.head, 'script', {
+    src: safari.extension.baseURI + 'framework7.min.js',
+    onload: onFrameworkLoad
+  });
+  // init framework7
+  function onFrameworkLoad () {
+    var myApp = new Framework7();
+    var $$ = Dom7;
+    var mainView = myApp.addView('.view-main', {
+      dynamicNavbar: true
+    });
+  }
   // utils
   function appendTag (parent, tagName, props) {
     var tag = document.createElement(tagName);
