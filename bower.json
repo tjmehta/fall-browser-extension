@@ -1,0 +1,13 @@
+{
+  "name": "fall-browser-extension",
+  "version": "0.0.0",
+  "homepage": "https://github.com/tjmehta/fall-browser-extension",
+  "authors": [
+    "tjmehta <tejesh.mehta@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "framework7": "~1.0.5"
+  }
+}

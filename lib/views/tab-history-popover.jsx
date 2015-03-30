@@ -1,15 +1,21 @@
 /** @jsx React.DOM */
 'use strict';
 require('config');
-var pluck = require('101/pluck');
+var pluck   = require('101/pluck');
+var equals  = require('101/equals');
+var compose = require('101/compose');
 var React = require('react');
+var url = require('url');
+var isExpiredTab = compose(equals(true), pluck('expired'));
 
 var TabHistoryPopover = React.createClass({
   getInitialState: function () {
     console.log('TabHistoryPopover', 'getInitialState', arguments);
     this.listenToOpenWindows(this.props.openWindows);
+    this.closedTabs = this.props.closedTabs;
     return {
-      closedTabs: this.props.closedTabs
+      activeNavTab: 1,
+      closedTabs: this.props.closedTabs.slice() // copy
     };
   },
   listenToOpenWindows: function (windows) {
@@ -32,11 +38,10 @@ var TabHistoryPopover = React.createClass({
   },
   handleTabClose: function (tab) {
     console.log('TabHistoryPopover', 'handleTabClose', arguments);
-    var closedTabs = this.state.closedTabs.slice(); // copy
-    closedTabs.push(tab);
-    console.log('TabHistoryPopover', 'state.length', closedTabs.length);
+    this.closedTabs.unshift(tab);
+    console.log('TabHistoryPopover', 'state.length', this.closedTabs.length);
     this.setState({
-      closedTabs: closedTabs
+      closedTabs: this.closedTabs.slice() // copy
     });
   },
   stopListeningToTabs: function (tabs) {
@@ -45,23 +50,98 @@ var TabHistoryPopover = React.createClass({
   },
   render: function () {
     console.log('TabHistoryPopover', 'render', this.state);
-    var closedTabs = this.state.closedTabs;
+    return <div className="views">
+      <div className="view view-main">
+        <div className="navbar">
+          <div className="navbar-inner">
+            <div className="left"></div>
+            <div className="center">Closed Tabs</div>
+            <div className="right"></div>
+            <div className="subnavbar">
+              <div className="buttons-row">
+                <a
+                  className={ this.getItemClass(1, "button tab-link") }
+                  onClick={ this.setActiveItem.bind(null, 1) }>All</a>
+                <a
+                  className={ this.getItemClass(2, "button tab-link") }
+                  onClick={ this.setActiveItem.bind(null, 2) }>Expired</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="pages navbar-through">
+          <div data-page="home" className="page with-subnavbar">
+            <div className="page-content hide-bars-on-scroll pad-top-64">
+              <div className="tabs">
+                <div
+                  className={ this.getItemClass(1, "tab list-block media-list") }>
+                  { this.tabList(this.state.closedTabs, 'No closed or expired tabs') }
+                </div>
+                <div
+                  className={ this.getItemClass(2, "tab list-block media-list") }>
+                  { this.tabList(this.state.closedTabs.filter(isExpiredTab), 'No expired tabs') }
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>;
+  },
+  setActiveItem: function (activeNavTab) {
+    this.setState({
+      activeNavTab: activeNavTab,
+      closedTabs: this.state.closedTabs // keep same
+    });
+  },
+  getItemClass: function (navTabNum, classes) {
+    // blah hack for framework7
+    console.log('TabHistoryPopover', 'getItemClass', arguments, this.state);
+    return classes + ((this.state.activeNavTab === navTabNum) ? ' active' : '');
+  },
+  tabList: function (tabs, emptyMessage) {
     return <ul>
       {
-        closedTabs.length ?
-          closedTabs.map(this.tabRow) :
-          'No closed or expired tabs'
+        tabs.length ?
+          tabs.map(this.tabRow) :
+          this.emptyList(emptyMessage)
       }
-      </ul>;
+    </ul>;
   },
-  tabRow: function (closedTab) {
+  tabRow: function (tab) {
     console.log('TabHistoryPopover', 'tabRow', arguments);
-    return <li key={ closedTab.uuid }>
-      <span className="title">
-        { closedTab.browserTab.title }
-      </span>
-      <span>{ closedTab.expired }</span>
+    return <li key={ tab.uuid }>
+      <a className="cursor-pointer item-link item-content" onClick={ this.handleItemClick.bind(null, tab) }>
+        <div className="item-media"><img src={ this.faviconUrl(tab.url) } width="44" /></div>
+        <div className="item-inner">
+          <div className="item-title-row">
+            <div className="item-title">{ tab.title }</div>
+            <div class="item-after">{ tab.expired ? 'expired' : '' }</div>
+          </div>
+          <div className="item-subtitle gray">{ tab.url }</div>
+        </div>
+      </a>
     </li>;
+  },
+  faviconUrl: function (fullUrl) {
+    console.log('TabHistoryPopover', 'faviconUrl', arguments);
+    var parsed = url.parse(fullUrl);
+    parsed.path = parsed.pathname = '/favicon.ico';
+
+    return url.format(parsed);
+  },
+  emptyList: function (text) {
+    console.log('TabHistoryPopover', 'emptyList', arguments);
+    return <li key="empty" className="item-content">{ text }</li>;
+  },
+  handleItemClick: function (tab) {
+    console.log('TabHistoryPopover', 'handleItemClick', arguments);
+    this.closedTabs.remove(tab);
+    this.setState({
+      activeNavTab: this.state.activeNavTab, // same
+      closedTabs: this.closedTabs.slice()    // copy
+    });
+    tab.restore()
   }
 });
 

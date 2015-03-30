@@ -5,13 +5,15 @@
   "description": "Fall Browser Extension",
   "main": "index.js",
   "scripts": {
+    "postinstall": "bower install",
     "test": "NODE_PATH='./lib:./test' lab -c test/*.js",
     "test-watch": "nodemon -x npm test",
-    "watch": "nodemon -i ./dist/* -x npm run build",
+    "watch": "nodemon -e js,html,jsx,css -i ./dist/* -x npm run build",
     "build": "npm run build-index && npm run build-popover && npm run build-copy-files",
     "build-index": "NODE_PATH=./lib browserify -t reactify lib/controllers/index.js > dist/Fall.safariextension/index.min.js",
     "build-popover": "NODE_PATH=./lib browserify -t reactify lib/controllers/popover.jsx > dist/Fall.safariextension/popover.min.js",
-    "build-copy-files": "cp lib/views/*.html dist/Fall.safariextension/ && cp lib/images/* dist/Fall.safariextension/"
+    "build-copy-files": "cp lib/views/*.html dist/Fall.safariextension/ && cp lib/images/* dist/Fall.safariextension/ && cp lib/styles/* dist/Fall.safariextension/ && npm run copy-framework7",
+    "copy-framework7": "cp bower_components/framework7/dist/css/framework7.min.css dist/Fall.safariextension/ && cp bower_components/framework7/dist/js/framework7.min.* dist/Fall.safariextension/"
   },
   "repository": {
     "type": "git",

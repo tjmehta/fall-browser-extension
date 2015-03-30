@@ -1,6 +1,34 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <title>Fall - Closed Tabs</title>
+</head>
 <div id="popover"></div>
 <script>
-  var popoverScript = document.createElement('script');
-  popoverScript.src = safari.extension.baseURI + 'popover.min.js';
-  document.body.appendChild(popoverScript);
+  'use strict';
+  // framework7 css
+  appendTag(document.head, 'link', {
+    rel: 'stylesheet',
+    href: safari.extension.baseURI + 'framework7.min.css'
+  });
+  // popover app css
+  appendTag(document.head, 'link', {
+    rel: 'stylesheet',
+    href: safari.extension.baseURI + 'main.css'
+  });
+  // popover app js
+  appendTag(document.body, 'script', {
+    src: safari.extension.baseURI + 'popover.min.js'
+  });
+  // utils
+  function appendTag (parent, tagName, props) {
+    var tag = document.createElement(tagName);
+    Object.keys(props).forEach(function (key) {
+      var val = props[key];
+      tag[key] = val;
+    });
+    parent.appendChild(tag);
+  }
 </script>
