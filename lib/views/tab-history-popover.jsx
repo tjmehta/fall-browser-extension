@@ -4,10 +4,11 @@ require('config');
 var pluck   = require('101/pluck');
 var equals  = require('101/equals');
 var compose = require('101/compose');
+var hasProps = require('101/has-properties');
 var React = require('react');
-var url = require('url');
 var isExpiredTab = compose(equals(true), pluck('expired'));
 var settings = require('models/settings');
+require('config');
 
 var TabHistoryPopover = React.createClass({
   getInitialState: function () {
@@ -15,9 +16,10 @@ var TabHistoryPopover = React.createClass({
     this.listenToOpenWindows(this.props.openWindows);
     settings.addEventListener('change', this.handleSettingsChange);
     this.closedTabs = this.props.closedTabs;
+    this.listenToClosedTabs(this.closedTabs);
     this.maxTabs = settings.get(process.env.MAX_TABS);
     return {
-      closedTabs: this.closedTabs.slice() // copy
+      closedTabs: this.closedTabs.toArray() // copy
     };
   },
   handleSettingsChange: function (evt) {
@@ -29,12 +31,12 @@ var TabHistoryPopover = React.createClass({
   },
   handleMaxTabsChange: function (maxTabs) {
     this.maxTabs = maxTabs;
-    var tabsToRemove = this.closedTabs.filter(isExpiredTab).length - this.maxTabs;
-    this.closedTabs = (tabsToRemove > 0) ?
-      this.closedTabs.slice(0, 0-tabsToRemove) :
-      this.closedTabs.slice();
+    var numToRemove = this.closedTabs.filter(isExpiredTab).length - this.maxTabs;
+    if (numToRemove > 0) {
+      this.closedTabs.splice(0-numToRemove, numToRemove);
+    }
     this.setState({
-      closedTabs: this.closedTabs
+      closedTabs: this.closedTabs.toArray() // copy
     });
   },
   listenToOpenWindows: function (windows) {
@@ -46,6 +48,10 @@ var TabHistoryPopover = React.createClass({
   listenToOpenTabs: function (tabs) {
     console.log('TabHistoryPopover', 'listenToOpenTabs', arguments);
     tabs.on('tab:close', this.handleTabClose);
+  },
+  listenToClosedTabs: function (tabs) {
+    console.log('TabHistoryPopover', 'listenToClosedTabs', arguments);
+    tabs.on('tab:change', this.handleClosedTabChange);
   },
   handleNewWindow: function (window) {
     console.log('TabHistoryPopover', 'handleNewWindow', arguments);
@@ -59,10 +65,22 @@ var TabHistoryPopover = React.createClass({
     console.log('TabHistoryPopover', 'handleTabClose', arguments);
     console.log('TabHistoryPopover', 'before unshift closedTabs.length', this.closedTabs.length);
     if (!tab.url) { return; }
-    this.closedTabs.unshift(tab);
+    var existing = find(this.closedTabs, hasProps({ url: tab.url }));
+    if (existing) {
+      this.closedTabs.remove(existing);
+      this.closedTabs.unshift(existing);
+    }
+    else {
+      this.closedTabs.unshift(tab);
+    }
     console.log('TabHistoryPopover', 'after unshift closedTabs.length', this.closedTabs.length);
     this.setState({
-      closedTabs: this.closedTabs.slice() // copy
+      closedTabs: this.closedTabs.toArray() // copy
+    });
+  },
+  handleClosedTabChange: function () {
+    this.setState({
+      closedTabs: this.closedTabs.toArray() // copy
     });
   },
   stopListeningToTabs: function (tabs) {
@@ -124,7 +142,7 @@ var TabHistoryPopover = React.createClass({
     console.log('TabHistoryPopover', 'tabRow', arguments);
     return <li key={ tab.uuid }>
       <a className="cursor-pointer item-link item-content" onClick={ this.handleItemClick.bind(null, tab) }>
-        <div className="item-media"><img src={ this.faviconUrl(tab.url) } width="44" /></div>
+        <div className="item-media"><img src={ tab.favicon() } width="44" /></div>
         <div className="item-inner">
           <div className="item-title-row">
             <div className="item-title">{ tab.title }</div>
@@ -135,13 +153,6 @@ var TabHistoryPopover = React.createClass({
       </a>
     </li>;
   },
-  faviconUrl: function (fullUrl) {
-    console.log('TabHistoryPopover', 'faviconUrl', arguments);
-    var parsed = url.parse(fullUrl);
-    parsed.path = parsed.pathname = '/favicon.ico';
-
-    return url.format(parsed);
-  },
   emptyList: function (text) {
     console.log('TabHistoryPopover', 'emptyList', arguments);
     return <li key="empty" className="item-content">{ text }</li>;
@@ -150,7 +161,7 @@ var TabHistoryPopover = React.createClass({
     console.log('TabHistoryPopover', 'handleItemClick', arguments);
     this.closedTabs.remove(tab);
     this.setState({
-      closedTabs: this.closedTabs.slice()    // copy
+      closedTabs: this.closedTabs.toArray() // copy
     });
     tab.restore()
   }
