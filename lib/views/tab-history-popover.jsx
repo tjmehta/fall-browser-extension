@@ -79,6 +79,7 @@ var TabHistoryPopover = React.createClass({
     });
   },
   handleClosedTabChange: function () {
+    console.log('TabHistoryPopover', 'handleClosedTabChange', arguments);
     this.setState({
       closedTabs: this.closedTabs.toArray() // copy
     });
