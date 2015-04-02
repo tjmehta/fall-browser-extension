@@ -39,6 +39,7 @@
     "react": "^0.12.2",
     "array": "^0.4.3",
     "array-extended": "0.0.11",
-    "listen-all": "^0.1.0"
+    "listen-all": "^0.1.0",
+    "async-some": "^1.0.1"
   }
 }

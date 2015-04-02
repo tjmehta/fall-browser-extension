@@ -4,3 +4,16 @@
 .gray {
   color: #8e8e93;
 }
+.cursor-pointer {
+  cursor: pointer;
+}
+.item-media {
+  padding-top: 4px !important;
+  padding-bottom: 5px !important;
+}
+img.thumbnail {
+  object-fit: cover; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  width:  54px;
+  height: 54px;
+}

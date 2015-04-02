@@ -143,7 +143,7 @@ var TabHistoryPopover = React.createClass({
     console.log('TabHistoryPopover', 'tabRow', arguments);
     return <li key={ tab.uuid }>
       <a className="cursor-pointer item-link item-content" onClick={ this.handleItemClick.bind(null, tab) }>
-        <div className="item-media"><img src={ tab.favicon() } width="44" /></div>
+        <div className="item-media"><img src={ tab.favicon() } className="thumbnail" /></div>
         <div className="item-inner">
           <div className="item-title-row">
             <div className="item-title">{ tab.title }</div>

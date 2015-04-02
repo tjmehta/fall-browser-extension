@@ -5,43 +5,45 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <title>Fall - Closed Tabs</title>
 </head>
-<div id="popover"></div>
-<script>
-  'use strict';
-  // framework7 css
-  appendTag(document.head, 'link', {
-    rel: 'stylesheet',
-    href: safari.extension.baseURI + 'framework7.min.css'
-  });
-  // popover app css
-  appendTag(document.head, 'link', {
-    rel: 'stylesheet',
-    href: safari.extension.baseURI + 'main.css'
-  });
-  // popover app js
-  appendTag(document.body, 'script', {
-    src: safari.extension.baseURI + 'popover.min.js'
-  });
-  // framework7 js
-  appendTag(document.head, 'script', {
-    src: safari.extension.baseURI + 'framework7.min.js',
-    onload: onFrameworkLoad
-  });
-  // init framework7
-  function onFrameworkLoad () {
-    var myApp = new Framework7();
-    var $$ = Dom7;
-    var mainView = myApp.addView('.view-main', {
-      dynamicNavbar: true
+<body>
+  <div id="popover"></div>
+  <script>
+    'use strict';
+    // framework7 css
+    appendTag(document.head, 'link', {
+      rel: 'stylesheet',
+      href: safari.extension.baseURI + 'framework7.min.css'
     });
-  }
-  // utils
-  function appendTag (parent, tagName, props) {
-    var tag = document.createElement(tagName);
-    Object.keys(props).forEach(function (key) {
-      var val = props[key];
-      tag[key] = val;
+    // popover app css
+    appendTag(document.head, 'link', {
+      rel: 'stylesheet',
+      href: safari.extension.baseURI + 'main.css'
     });
-    parent.appendChild(tag);
-  }
-</script>
+    // popover app js
+    appendTag(document.body, 'script', {
+      src: safari.extension.baseURI + 'popover.min.js'
+    });
+    // framework7 js
+    appendTag(document.head, 'script', {
+      src: safari.extension.baseURI + 'framework7.min.js',
+      onload: onFrameworkLoad
+    });
+    // init framework7
+    function onFrameworkLoad () {
+      var myApp = new Framework7();
+      var $$ = Dom7;
+      var mainView = myApp.addView('.view-main', {
+        dynamicNavbar: true
+      });
+    }
+    // utils
+    function appendTag (parent, tagName, props) {
+      var tag = document.createElement(tagName);
+      Object.keys(props).forEach(function (key) {
+        var val = props[key];
+        tag[key] = val;
+      });
+      parent.appendChild(tag);
+    }
+  </script>
+</body>
