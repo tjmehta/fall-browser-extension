@@ -30,6 +30,7 @@ var TabHistoryPopover = React.createClass({
     }
   },
   handleMaxTabsChange: function (maxTabs) {
+    console.log('TabHistoryPopover', 'handleMaxTabsChange', arguments);
     this.maxTabs = maxTabs;
     var numToRemove = this.closedTabs.filter(isExpiredTab).length - this.maxTabs;
     if (numToRemove > 0) {
@@ -42,7 +43,7 @@ var TabHistoryPopover = React.createClass({
   listenToOpenWindows: function (windows) {
     console.log('TabHistoryPopover', 'listenToOpenWindows', arguments);
     windows.on('add', this.handleNewWindow);
-    windows.on('window:close', this.handleTabClose);
+    windows.on('window:close', this.handleWindowClose);
     windows.map(pluck('tabs')).forEach(this.listenToOpenTabs);
   },
   listenToOpenTabs: function (tabs) {
@@ -65,14 +66,8 @@ var TabHistoryPopover = React.createClass({
     console.log('TabHistoryPopover', 'handleTabClose', arguments);
     console.log('TabHistoryPopover', 'before unshift closedTabs.length', this.closedTabs.length);
     if (!tab.url) { return; }
-    var existing = find(this.closedTabs, hasProps({ url: tab.url }));
-    if (existing) {
-      this.closedTabs.remove(existing);
-      this.closedTabs.unshift(existing);
-    }
-    else {
-      this.closedTabs.unshift(tab);
-    }
+    var existing = this.closedTabs.remove(hasProps({ url: tab.url }));
+    this.closedTabs.unshift(existing || tab);
     console.log('TabHistoryPopover', 'after unshift closedTabs.length', this.closedTabs.length);
     this.setState({
       closedTabs: this.closedTabs.toArray() // copy
