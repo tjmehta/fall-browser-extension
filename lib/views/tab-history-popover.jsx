@@ -7,10 +7,10 @@ var compose = require('101/compose');
 var hasProps = require('101/has-properties');
 var React = require('react');
 var isExpiredTab = compose(equals(true), pluck('expired'));
+var SettingsPage = require('./settings-page.jsx');
 var settings = require('models/settings');
-require('config');
 
-var TabHistoryPopover = React.createClass({
+var TabHistoryPopover = module.exports = React.createClass({
   getInitialState: function () {
     console.log('TabHistoryPopover', 'getInitialState', arguments);
     this.listenToOpenWindows(this.props.openWindows);
@@ -88,10 +88,13 @@ var TabHistoryPopover = React.createClass({
     return <div className="views">
       <div className="view view-main">
         <div className="navbar">
-          <div className="navbar-inner">
+          {/* Home Navbar */}
+          <div data-page="home" className="navbar-inner">
             <div className="left"></div>
             <div className="center">Closed Tabs</div>
-            <div className="right"></div>
+            <div className="right sliding">
+              <a href="#settings" className="link">Settings</a>
+            </div>
             <div className="subnavbar">
               <div className="buttons-row">
                 <a
@@ -103,8 +106,11 @@ var TabHistoryPopover = React.createClass({
               </div>
             </div>
           </div>
+          {/* Settings Navbar */}
+          { SettingsPage.navBar }
         </div>
         <div className="pages navbar-through">
+          {/* Home Page */}
           <div data-page="home" className="page with-subnavbar">
             <div className="page-content hide-bars-on-scroll pad-top-64">
               <div className="tabs">
@@ -121,6 +127,8 @@ var TabHistoryPopover = React.createClass({
               </div>
             </div>
           </div>
+          {/* Settings Page */}
+          <SettingsPage />
         </div>
       </div>
     </div>;
@@ -155,12 +163,10 @@ var TabHistoryPopover = React.createClass({
   },
   handleItemClick: function (tab) {
     console.log('TabHistoryPopover', 'handleItemClick', arguments);
-    this.closedTabs.remove(tab);
+    // this.closedTabs.remove(tab); // don't remove restored tab
     this.setState({
       closedTabs: this.closedTabs.toArray() // copy
     });
     tab.restore()
   }
 });
-
-module.exports = TabHistoryPopover;

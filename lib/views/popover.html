@@ -30,10 +30,13 @@
     });
     // init framework7
     function onFrameworkLoad () {
-      var myApp = new Framework7();
-      var $$ = Dom7;
-      var mainView = myApp.addView('.view-main', {
-        dynamicNavbar: true
+      window.myApp = new Framework7({
+        animateNavBackIcon: true
+      });
+      window.$$ = Dom7;
+      window.mainView = myApp.addView('.view-main', {
+        dynamicNavbar: true,
+        domCache: true
       });
     }
     // utils
