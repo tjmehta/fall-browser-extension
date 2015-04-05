@@ -95,16 +95,6 @@ var TabHistoryPopover = module.exports = React.createClass({
             <div className="right sliding">
               <a href="#settings" className="link">Settings</a>
             </div>
-            <div className="subnavbar">
-              <div className="buttons-row">
-                <a
-                  href="#tab1"
-                  className="button tab-link active">All</a>
-                <a
-                  href="#tab2"
-                  className="button tab-link">Expired</a>
-              </div>
-            </div>
           </div>
           {/* Settings Navbar */}
           { SettingsPage.navBar }
@@ -112,18 +102,26 @@ var TabHistoryPopover = module.exports = React.createClass({
         <div className="pages navbar-through">
           {/* Home Page */}
           <div data-page="home" className="page with-subnavbar">
+            /* Search bar */
+            <form
+                data-search-list=".list-block-search"
+                data-search-in=".item-title"
+                className="searchbar searchbar-init">
+              <div className="searchbar-input">
+                <input type="search" placeholder="Search" />
+                <a href="#" className="searchbar-clear"></a>
+              </div>
+              <a href="#" className="searchbar-cancel">Cancel</a>
+            </form>
+            /* Search bar Overlay */
+            <div className="searchbar-overlay"></div>
             <div className="page-content hide-bars-on-scroll pad-top-64">
-              <div className="tabs">
-                <div
-                  id="tab1"
-                  className="tab list-block media-list active">
-                  { this.tabList(this.state.closedTabs.slice(0, this.maxTabs), 'No closed or expired tabs') }
-                </div>
-                <div
-                  id="tab2"
-                  className="tab list-block media-list">
-                  { this.tabList(this.state.closedTabs.filter(isExpiredTab).slice(0, this.maxTabs), 'No expired tabs') }
-                </div>
+              <div className="content-block searchbar-not-found">
+                <div className="content-block-inner">Nothing found</div>
+              </div>
+
+              <div className="list-block list-block-search media-list active searchbar-found">
+                { this.tabList(this.state.closedTabs.slice(0, this.maxTabs), 'No closed or expired tabs') }
               </div>
             </div>
           </div>
