@@ -28,14 +28,13 @@ var SettingsPage = module.exports = React.createClass({
     });
   },
   handleSliderChange: function (evt) {
-    console.log('SettingsPage', 'handleSliderChange', arguments);
+    console.log('SettingsPage', 'handleSliderChange', arguments, evt.target.value);
     var $input = evt.target;
     var val = parseInt($input.value);
     debouncedSettingsSet($input.name, val);
     var all = settings.all();
-    Object.keys(all).some(function (key) {
-      if (key === $input.name) {
-        var vals = all[key];
+    all.some(function (vals) {
+      if (vals.key === $input.name) {
         vals.tempVal = val;
         return true; // break some
       }
@@ -45,8 +44,10 @@ var SettingsPage = module.exports = React.createClass({
     });
   },
   handleBoolChange: function (evt) {
-    console.log('SettingsPage', 'handleBoolChange', arguments);
-
+    console.log('SettingsPage', 'handleBoolChange', arguments, evt.target.checked);
+    var $input = evt.target;
+    var val = $input.checked;
+    settings.set($input.name, val);
   },
   render: function () {
     console.log('SettingsPage', 'render', arguments);
