@@ -79,13 +79,44 @@ var TabHistoryPopover = module.exports = React.createClass({
       closedTabs: this.closedTabs.toArray() // copy
     });
   },
+  handleHiddenInputChange: function (evt) {
+    console.log('TabHistoryPopover', 'handleHiddenInputChange', arguments);
+    var $hidden = evt.target;
+    var $search = document.querySelector('input[type=search]')
+    $search.value = $hidden.value;
+    $hidden.value = '';
+    $search.click();
+    $search.focus();
+
+  },
   stopListeningToTabs: function (tabs) {
     console.log('TabHistoryPopover', 'stopListeningToTabs', arguments);
     tabs.off('tab:close', this.handleWindowClose);
   },
+  handleSearchKeyDown: function (evt) {
+    console.log('TabHistoryPopover', 'handleSearchKeyDown', arguments);
+    if (evt.keyCode === 27) {
+      this.cancelSearch();
+    }
+  },
+  focusOnHidden: function () {
+    console.log('TabHistoryPopover', 'focusOnHidden', arguments);
+    var $search = document.querySelector('input[type=search]')
+    if ($search === document.activeElement) {
+      return;
+    }
+    var $hidden = document.querySelector('input.offscreen');
+    $hidden.click();
+    $hidden.focus();
+  },
+  cancelSearch: function () {
+    console.log('TabHistoryPopover', 'cancelSearch', arguments);
+    var $cancelSearch = document.querySelector('.searchbar-cancel');
+    $cancelSearch.click();
+  },
   render: function () {
     console.log('TabHistoryPopover', 'render', this.state);
-    return <div className="views">
+    return <div className="views" onClick={ this.focusOnHidden } onKeyDown={ this.focusOnHidden } >
       <div className="view view-main">
         <div className="navbar">
           {/* Home Navbar */}
@@ -102,18 +133,19 @@ var TabHistoryPopover = module.exports = React.createClass({
         <div className="pages navbar-through">
           {/* Home Page */}
           <div data-page="home" className="page with-subnavbar">
-            /* Search bar */
+            <input type="text" className="offscreen" onChange={ this.handleHiddenInputChange } />
+            {/* Search bar */}
             <form
                 data-search-list=".list-block-search"
                 data-search-in=".item-title"
                 className="searchbar searchbar-init">
               <div className="searchbar-input">
-                <input type="search" placeholder="Search" />
+                <input type="search" placeholder="Search" onKeyDown={ this.handleSearchKeyDown } onBlur={ this.focusOnHidden }/>
                 <a href="#" className="searchbar-clear"></a>
               </div>
               <a href="#" className="searchbar-cancel">Cancel</a>
             </form>
-            /* Search bar Overlay */
+            {/* Search bar Overlay */}
             <div className="searchbar-overlay"></div>
             <div className="page-content hide-bars-on-scroll pad-top-64">
               <div className="content-block searchbar-not-found">
@@ -162,9 +194,7 @@ var TabHistoryPopover = module.exports = React.createClass({
   handleItemClick: function (tab) {
     console.log('TabHistoryPopover', 'handleItemClick', arguments);
     // this.closedTabs.remove(tab); // don't remove restored tab
-    this.setState({
-      closedTabs: this.closedTabs.toArray() // copy
-    });
     tab.restore()
+    this.cancelSearch();
   }
 });

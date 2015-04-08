@@ -17,3 +17,7 @@ img.thumbnail {
   width:  54px;
   height: 54px;
 }
+.offscreen {
+  position: absolute;
+  top: -500px;
+}

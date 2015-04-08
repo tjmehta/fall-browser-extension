@@ -6,8 +6,8 @@ var React = require('react');
 var TabHistoryPopover = require('views/tab-history-popover.jsx');
 var Tabs = require('models/tabs');
 
-var openWindows = require('models/open-windows');
-var closedTabs = window.localStorage.closedTabs ?
+window.openWindows = require('models/open-windows');
+window.closedTabs = window.localStorage.closedTabs ?
   new Tabs(JSON.parse(window.localStorage.closedTabs), {dontRemoveOnDestroy:true}) :
   new Tabs([], {dontRemoveOnDestroy:true});
 
@@ -19,7 +19,7 @@ function saveClosedTabs () {
 
 React.render(
   <TabHistoryPopover
-    closedTabs={ closedTabs }
-    openWindows={ openWindows } />,
+    closedTabs={ window.closedTabs }
+    openWindows={ window.openWindows } />,
   document.getElementById('popover')
 );
