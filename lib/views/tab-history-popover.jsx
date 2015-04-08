@@ -114,6 +114,10 @@ var TabHistoryPopover = module.exports = React.createClass({
     var $cancelSearch = document.querySelector('.searchbar-cancel');
     $cancelSearch.click();
   },
+  handleFaviconError: function (tab) {
+    console.log('TabHistoryPopover', 'handleFaviconError', arguments);
+    tab.setFaviconUrl('');
+  },
   render: function () {
     console.log('TabHistoryPopover', 'render', this.state);
     return <div className="views" onClick={ this.focusOnHidden } onKeyDown={ this.focusOnHidden } >
@@ -178,7 +182,7 @@ var TabHistoryPopover = module.exports = React.createClass({
     console.log('TabHistoryPopover', 'tabRow', arguments);
     return <li key={ tab.uuid }>
       <a className="cursor-pointer item-link item-content" onClick={ this.handleItemClick.bind(null, tab) }>
-        <div className="item-media"><img src={ tab.favicon() } className="thumbnail" /></div>
+        <div className="item-media"><img src={ tab.favicon() } className="thumbnail" onError={ this.handleFaviconError.bind(null, tab) } /></div>
         <div className="item-inner">
           <div className="item-title-row">
             <div className="item-title">{ tab.title }</div>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Author</key>
+	<string>tjmehta</string>
+	<key>Builder Version</key>
+	<string>10600.3.18</string>
+	<key>CFBundleDisplayName</key>
+	<string>Fall</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.tjmehta.fall</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>Chrome</key>
+	<dict>
+		<key>Database Quota</key>
+		<real>5242880</real>
+		<key>Global Page</key>
+		<string>index.html</string>
+		<key>Popovers</key>
+		<array>
+			<dict>
+				<key>Filename</key>
+				<string>popover.html</string>
+				<key>Height</key>
+				<real>600</real>
+				<key>Identifier</key>
+				<string>tabHistoryPopover</string>
+				<key>Width</key>
+				<real>500</real>
+			</dict>
+		</array>
+		<key>Toolbar Items</key>
+		<array>
+			<dict>
+				<key>Command</key>
+				<string></string>
+				<key>Identifier</key>
+				<string>tabHistoryButton</string>
+				<key>Image</key>
+				<string>button.png</string>
+				<key>Label</key>
+				<string>Tab History</string>
+				<key>Popover</key>
+				<string>tabHistoryPopover</string>
+				<key>Tool Tip</key>
+				<string>Fall: Closed Tabs History</string>
+			</dict>
+		</array>
+	</dict>
+	<key>Content</key>
+	<dict>
+		<key>Scripts</key>
+		<dict/>
+	</dict>
+	<key>Description</key>
+	<string>Close tabs automatically over time. Closed tabs may be recovered from a searchable dropdown list.</string>
+	<key>DeveloperIdentifier</key>
+	<string>6585BUZYPE</string>
+	<key>ExtensionInfoDictionaryVersion</key>
+	<string>1.0</string>
+	<key>Permissions</key>
+	<dict>
+		<key>Website Access</key>
+		<dict>
+			<key>Include Secure Pages</key>
+			<true/>
+			<key>Level</key>
+			<string>All</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

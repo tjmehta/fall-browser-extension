@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>DefaultValue</key>
+		<true/>
+		<key>Key</key>
+		<string>note</string>
+		<key>Title</key>
+		<string>NOTE: Edit settings in via the button popover (it's easier)</string>
+		<key>Type</key>
+		<string>CheckBox</string>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<real>15</real>
+		<key>Key</key>
+		<string>tabExpirationTime</string>
+		<key>MaximumValue</key>
+		<real>720</real>
+		<key>MinimumValue</key>
+		<real>5</real>
+		<key>Title</key>
+		<string>Tab Expiration Time (minutes)</string>
+		<key>Type</key>
+		<string>Slider</string>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<real>1</real>
+		<key>Key</key>
+		<string>minOpenTabsPerWindow</string>
+		<key>MaximumValue</key>
+		<real>10</real>
+		<key>MinimumValue</key>
+		<real>1</real>
+		<key>Title</key>
+		<string>Min Tabs to Keep Open (per Window)</string>
+		<key>Type</key>
+		<string>Slider</string>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<real>100</real>
+		<key>Key</key>
+		<string>maxTabsInHistory</string>
+		<key>MaximumValue</key>
+		<real>500</real>
+		<key>MinimumValue</key>
+		<real>25</real>
+		<key>Title</key>
+		<string>Max Tabs in History</string>
+		<key>Type</key>
+		<string>Slider</string>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<true/>
+		<key>Key</key>
+		<string>enabled</string>
+		<key>Title</key>
+		<string>Enabled</string>
+		<key>Type</key>
+		<string>CheckBox</string>
+	</dict>
+</array>
+</plist>

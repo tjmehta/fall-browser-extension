@@ -14,8 +14,15 @@
 img.thumbnail {
   object-fit: cover; /* Do not scale the image */
   object-position: center; /* Center the image within the element */
+  max-width:  51px;
+  max-height: 51px;
+  margin: 0 auto;
+}
+.item-media {
   width:  54px;
   height: 54px;
+  text-align: center;
+  border: 1px solid lightgray;
 }
 .offscreen {
   position: absolute;

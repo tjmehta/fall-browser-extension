@@ -38,6 +38,10 @@
         dynamicNavbar: true,
         domCache: true
       });
+      window.mySearchbar = myApp.searchbar('.searchbar', {
+        searchList: '.list-block-search',
+        searchIn: '.item-title, .item-subtitle, .item-after'
+      });
     }
     // utils
     function appendTag (parent, tagName, props) {
