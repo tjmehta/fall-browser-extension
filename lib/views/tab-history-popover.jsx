@@ -200,7 +200,16 @@ var TabHistoryPopover = module.exports = React.createClass({
   handleItemClick: function (tab) {
     console.log('TabHistoryPopover', 'handleItemClick', arguments);
     // this.closedTabs.remove(tab); // don't remove restored tab
-    tab.restore()
+    this.closedTabs.remove(tab);
+    this.closedTabs.unshift(tab);
+    this.setState({
+      closedTabs: this.closedTabs.toArray() // copy
+    });
     this.cancelSearch();
+    this.scrollToTop();
+    tab.restore()
+  },
+  scrollToTop: function () {
+    document.querySelector('.page-content').scrollTop = 0;
   }
 });

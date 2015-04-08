@@ -15,7 +15,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>1.0.0</string>
 	<key>Chrome</key>
 	<dict>
 		<key>Database Quota</key>
@@ -74,5 +74,9 @@
 			<string>All</string>
 		</dict>
 	</dict>
+	<key>Update Manifest URL</key>
+	<string>https://s3-us-west-1.amazonaws.com/mrs3bucket/fall/Manifest.plist</string>
+	<key>Website</key>
+	<string>http://github.com/tjmehta/fall-browser-extension</string>
 </dict>
 </plist>
