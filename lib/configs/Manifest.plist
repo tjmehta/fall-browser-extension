@@ -14,7 +14,7 @@
        <key>CFBundleShortVersionString</key>
        <string>1.0.0</string>
        <key>URL</key>
-       <string>https://s3-us-west-1.amazonaws.com/mrs3bucket/fall/Fall-v1.0.0.safariextz</string>
+       <string>https://s3-us-west-1.amazonaws.com/mrs3bucket/fall/Fall.safariextz</string>
      </dict>
    </array>
 </dict>
