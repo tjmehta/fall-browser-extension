@@ -122,9 +122,23 @@ var TabHistoryPopover = module.exports = React.createClass({
           {/* Home Navbar */}
           <div data-page="home" className="navbar-inner">
             <div className="left"></div>
-            <div className="center">Closed Tabs</div>
+            <div className="center">Fall: Closed Tabs History</div>
             <div className="right sliding">
               <a href="#settings" className="link">Settings</a>
+            </div>
+            {/* Search bar */}
+            <div className="subnavbar">
+              <form
+                  data-search-list=".list-block-search"
+                  data-search-in=".item-title"
+                  className="searchbar searchbar-init">
+                <input type="text" className="offscreen" onChange={ this.handleHiddenInputChange } />
+                <div className="searchbar-input">
+                  <input type="search" placeholder="Search" onKeyDown={ this.handleSearchKeyDown } onBlur={ this.focusOnHidden }/>
+                  <a href="#" className="searchbar-clear"></a>
+                </div>
+                <a href="#" className="searchbar-cancel">Cancel</a>
+              </form>
             </div>
           </div>
           {/* Settings Navbar */}
@@ -133,18 +147,6 @@ var TabHistoryPopover = module.exports = React.createClass({
         <div className="pages navbar-through">
           {/* Home Page */}
           <div data-page="home" className="page with-subnavbar">
-            <input type="text" className="offscreen" onChange={ this.handleHiddenInputChange } />
-            {/* Search bar */}
-            <form
-                data-search-list=".list-block-search"
-                data-search-in=".item-title"
-                className="searchbar searchbar-init">
-              <div className="searchbar-input">
-                <input type="search" placeholder="Search" onKeyDown={ this.handleSearchKeyDown } onBlur={ this.focusOnHidden }/>
-                <a href="#" className="searchbar-clear"></a>
-              </div>
-              <a href="#" className="searchbar-cancel">Cancel</a>
-            </form>
             {/* Search bar Overlay */}
             <div className="searchbar-overlay"></div>
             <div className="page-content hide-bars-on-scroll pad-top-64">
