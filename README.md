@@ -16,5 +16,8 @@ manually closed. Check out the screenshots below:
 ## Settings
 ![Settings](https://s3-us-west-1.amazonaws.com/mrs3bucket/fall/screenshot-settings.png) 
 
+## Browser Support
+* Safari
+
 ## License
 MIT
