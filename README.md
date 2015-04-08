@@ -7,13 +7,14 @@ This way Fall let's you focus on what's important. Closed browser tabs can be ea
 from a popover that is only a click away. Fall even allows you to restore tabs that you have
 manually closed. Check out the screenshots below:
 
-## Closed Tabs Popover
+## Screenshots
+### Closed Tabs Popover
 ![Closed Tabs Popover](https://s3-us-west-1.amazonaws.com/mrs3bucket/fall/screenshot-tabs.png?new) 
 
-## Search
+### Search
 ![Closed Tabs Popover](https://s3-us-west-1.amazonaws.com/mrs3bucket/fall/screenshot-search.png?new) 
 
-## Settings
+### Settings
 ![Settings](https://s3-us-west-1.amazonaws.com/mrs3bucket/fall/screenshot-settings.png?new) 
 
 ## Browser Support
