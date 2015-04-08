@@ -1,4 +1,4 @@
-![Fall Icon](https://s3-us-west-1.amazonaws.com/mrs3bucket/fall/fall-icon.png) 
+![ Fall Icon](https://s3-us-west-1.amazonaws.com/mrs3bucket/fall/Fall-256.png) 
 # Fall (browser-extension)
 ### Have you ever found yourself with more browser windows open than you could to deal with?
 Fall is a browser extension that prevents you from getting into that situation. Fall will 
@@ -7,14 +7,15 @@ This way Fall let's you focus on what's important. Closed browser tabs can be ea
 from a popover that is only a click away. Fall even allows you to restore tabs that you have
 manually closed. Check out the screenshots below:
 
-## Closed Tabs Popover
-![Closed Tabs Popover](https://s3-us-west-1.amazonaws.com/mrs3bucket/fall/screenshot-tabs.png) 
+## Screenshots
+### Closed Tabs Popover
+![Closed Tabs Popover](https://s3-us-west-1.amazonaws.com/mrs3bucket/fall/screenshot-tabs.png?new) 
 
-## Search
-![Closed Tabs Popover](https://s3-us-west-1.amazonaws.com/mrs3bucket/fall/screenshot-search.png) 
+### Search
+![Closed Tabs Popover](https://s3-us-west-1.amazonaws.com/mrs3bucket/fall/screenshot-search.png?new) 
 
-## Settings
-![Settings](https://s3-us-west-1.amazonaws.com/mrs3bucket/fall/screenshot-settings.png) 
+### Settings
+![Settings](https://s3-us-west-1.amazonaws.com/mrs3bucket/fall/screenshot-settings.png?new) 
 
 ## Browser Support
 Safari (Chrome should be very easy to add, maybe you can help? ;))
