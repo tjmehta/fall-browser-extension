@@ -17,6 +17,9 @@ manually closed. Check out the screenshots below:
 ### Settings
 ![Settings](https://s3-us-west-1.amazonaws.com/mrs3bucket/fall/screenshot-settings.png?new) 
 
+## Download
+[Download Safari Extension](https://s3-us-west-1.amazonaws.com/mrs3bucket/fall/Fall.safariextz)
+
 ## Browser Support
 Safari (Chrome should be very easy to add, maybe you can help? ;))
 
